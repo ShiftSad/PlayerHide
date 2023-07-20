@@ -38,6 +38,11 @@ class PlayerHideModule : Module {
                         retainAll { it in nearPlayers }
                     }
 
+                    // Add priority players, if they are not already in the list, they do not bypass the limit
+                    playerVisibilityMap[player]!!.addAll(nearPlayers.filter {
+                        it.hasPermission("playerhide.priority")
+                    }.take(setting.getPerformanceLevel().visiblePlayers - playerVisibilityMap[player]!!.size))
+
                     playerVisibilityMap[player]!!.addAll(nearPlayers.filter {
                         it !in playerVisibilityMap[player]!! && !it.hasPermission("playerhide.admin")
                     }.take(setting.getPerformanceLevel().visiblePlayers - playerVisibilityMap[player]!!.size))
