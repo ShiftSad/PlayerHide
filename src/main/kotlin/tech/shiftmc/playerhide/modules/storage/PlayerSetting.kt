@@ -53,10 +53,10 @@ data class PlayerSetting(
  *
  * @param visiblePlayers The number of players that should be visible to the user.
  */
-enum class PerformanceLevel(val visiblePlayers: Int) {
-    POTATO(0),
-    LOW(10),
-    MEDIUM(20),
-    HIGH(50),
-    EXTREME(500)
+enum class PerformanceLevel(val visiblePlayers: Int, val distance: Int) {
+    POTATO(0, 1),
+    LOW(10, 20),
+    MEDIUM(20, 30),
+    HIGH(50, 75),
+    EXTREME(500, 500)
 }

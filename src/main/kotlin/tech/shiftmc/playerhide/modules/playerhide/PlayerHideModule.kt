@@ -1,12 +1,10 @@
 package tech.shiftmc.playerhide.modules.playerhide
 
-import com.comphenix.protocol.PacketType
 import com.github.shynixn.mccoroutine.bukkit.launch
 import kotlinx.coroutines.delay
 import org.bukkit.entity.Player
 import tech.shiftmc.playerhide.PlayerHide.Companion.instance
 import tech.shiftmc.playerhide.modules.Module
-import tech.shiftmc.playerhide.modules.storage.PerformanceLevel
 import tech.shiftmc.playerhide.modules.storage.PlayerManager
 
 class PlayerHideModule : Module {
@@ -31,7 +29,7 @@ class PlayerHideModule : Module {
                     // If the player changed the performance level, we need to update the visibility
                     playerVisibilityMap[player] = playerVisibilityMap[player]!!.take(setting.getPerformanceLevel().visiblePlayers).toMutableList()
 
-                    val nearPlayers = nearPlayers(player, 1000, 30.0)
+                    val nearPlayers = nearPlayers(player, 1000, setting.getPerformanceLevel().distance.toDouble())
                     playerVisibilityMap[player]!!.apply {
                         // Admin should not count towards the limit
                         filterNot { it.hasPermission("playerhide.admin") }
